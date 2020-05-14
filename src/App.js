@@ -24,6 +24,7 @@ class App extends Component {
         password: ''
       }
     }
+    this.inputFirstNameRef = React.createRef()
   }
 
   handleSubmit = (e) => {
@@ -67,6 +68,11 @@ class App extends Component {
     this.setState({ formErrors, [name]: value }, () => console.log(this.state));
   }
 
+  componentDidMount() {
+    this.inputFirstNameRef.current.focus()
+    // this.inputFirstNameRef.current.value = the value of the input
+  }
+
   render() {
     const { formErrors } = this.state;
 
@@ -84,6 +90,7 @@ class App extends Component {
                 placeholder="Elena"
                 noValidate
                 onChange={this.handleChange}
+                ref={this.inputFirstNameRef}
               />
               {formErrors.firstName.length > 0 && (
                 <span className="errorMessage">{formErrors.firstName}</span>
